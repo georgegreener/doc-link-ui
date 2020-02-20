@@ -61,7 +61,7 @@ const UploadRow = props => {
 
   return (
     <StyledUploadRow value={value}>
-      <i class="material-icons" style={{ margin: "auto" }}>
+      <i className="material-icons" style={{ margin: "auto" }}>
         add_circle_outline
       </i>
       <Input
@@ -85,6 +85,7 @@ const UploadRow = props => {
       <MyDropzone
         value={value}
         uploadFile={(file, contents) => setFile({ file, contents })}
+        uploadDocument={props.uploadDocument}
       />
       <Button
         value={value}

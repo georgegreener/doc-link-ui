@@ -115,8 +115,8 @@ const Modal = props => {
     }
     else if (page === "Upload" && width > 600) {
       return {
-        gridColumn: "2 / 10",
-        gridRow: "2 / 11",
+        gridColumn: "4 / 8",
+        gridRow: "4 / 8",
         paddingBottom: "2vh"
       };
     }

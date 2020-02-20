@@ -1,4 +1,5 @@
 export const Data = [
+  
   {
     id: "japan",
     color: "hsl(252, 70%, 50%)",

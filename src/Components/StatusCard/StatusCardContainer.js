@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled, { css } from "styled-components";
-import { ResponsiveContext } from "../Context/ResponsiveContext";
+import { ResponsiveContext } from "../../Context/ResponsiveContext";
 
-const StyledStatusCardContainer = styled.div`
+export const StatusCardContainer = styled.div`
   display: flex;
   justify-content: space-between;
   grid-column: 2 / 10;
@@ -19,14 +19,14 @@ const StyledStatusCardContainer = styled.div`
     `}
 `;
 
-const StatusCardContainer = props => {
-  const value = useContext(ResponsiveContext);
+// const StatusCardContainer = props => {
+//   const value = useContext(ResponsiveContext);
 
-  return (
-    <StyledStatusCardContainer value={value}>
-      {props.children}
-    </StyledStatusCardContainer>
-  );
-};
+//   return (
+//     <StyledStatusCardContainer value={value}>
+//       {props.children}
+//     </StyledStatusCardContainer>
+//   );
+// };
 
-export default StatusCardContainer;
+// export default StatusCardContainer;

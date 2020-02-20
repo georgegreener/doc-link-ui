@@ -8,7 +8,7 @@ const Title = styled.div`
   font-weight: 500;
   font-size: xx-large;
   font-style: oblique;
-  width: 25%;
+  width: 50%;
   ${props =>
     props.value.innerWidth <= 600 &&
     css`
@@ -53,7 +53,7 @@ const Header = props => {
   const value = useContext(ResponsiveContext);
   return (
     <StyledHeader value={value}>
-      <Title value={value}>Document Linking Dashboard</Title>
+      <Title value={value}>Legal Document Linking Dashboard</Title>
       <Links value={value}>
         <div
           style={{
@@ -63,7 +63,7 @@ const Header = props => {
           onClick={() => props.updateDisplayedPage("/dashboard")}
         >
           <i
-            class="material-icons"
+            className="material-icons"
             style={props.displayedPage === "/dashboard" ? activeStyling : null}
           >
             dashboard
@@ -75,7 +75,7 @@ const Header = props => {
           onClick={() => props.updateDisplayedPage("/project")}
         >
           <i
-            class="material-icons"
+            className="material-icons"
             style={props.displayedPage === "/project" ? activeStyling : null}
           >
             {" "}
@@ -88,7 +88,7 @@ const Header = props => {
           onClick={() => props.updateDisplayedPage("/upload")}
         >
           <i
-            class="material-icons"
+            className="material-icons"
             style={props.displayedPage === "/upload" ? activeStyling : null}
           >
             cloud_upload

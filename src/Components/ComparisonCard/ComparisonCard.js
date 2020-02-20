@@ -1,52 +1,37 @@
 import React, { useContext } from "react";
-import styled, { css } from "styled-components";
-import { ResponsiveContext } from "../Context/ResponsiveContext";
+import { ResponsiveContext } from "../../Context/ResponsiveContext";
 
-const StyledComparisonCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #e8e8e8;
-  margin: 2vh 0;
-  padding: 1vh 1vw;
-`;
-
-const Row = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  ${props =>
-    props.value.innerWidth <= 600 &&
-    css`
-      flex-direction: column;
-    `}
-`;
-
-const PropertyContainer = styled.div`
-  display: block;
-  text-align: left;
-  width: 25%;
-`;
-
-const Property = styled.div`
-  text-decoration: underline;
-  font-size: 1em;
-`;
-
-const Value = styled.div`
-  font-size: 1em;
-`;
+// ComparisonCard Components
+import { StyledComparisonCard } from "./ComparisonCardComponents/StyledComparisonCard";
+import { Row } from "./ComparisonCardComponents/Row";
+import { PropertyContainer } from "./ComparisonCardComponents/PropertyContainer";
+import { Property } from "./ComparisonCardComponents/Property";
+import { Value } from "./ComparisonCardComponents/Value";
 
 const ComparisonCard = props => {
   const value = useContext(ResponsiveContext);
+  const data = props.data;
+  const hookArray = props.hookArray;
+  console.log(props.point);
+  let role;
+  props.data.forEach(d => {
+    // console.log(d);
+    // console.log(props.point.data.x);
+    if (props.point.data.x === d.date) {
+      // console.log("match");
+      role = d.role_dict;
+    }
+  });
+
+  console.log(role);
+  let counter = Object.keys(role);
+  let values = Object.values(role);
+  let length = counter.length;
+
+  console.log(counter);
+  console.log(values);
 
   return (
-    // <StyledComparisonCard style={props.style}>
-    // <Row>
-    //   <div></div>
-    //   <div onClick={() => props.displayComparison(props.point)}>X</div>
-    // </Row>
     <React.Fragment>
       {value.innerWidth <= 600 ? (
         <StyledComparisonCard style={props.style}>
@@ -57,14 +42,14 @@ const ComparisonCard = props => {
           <Row value={value}>
             <PropertyContainer>
               <Property>ID:</Property>
-              <Value>{props.point.id}</Value>
+              <Value>{props.point.serieId}</Value>
             </PropertyContainer>
             <PropertyContainer>
-              <Property>X-Value:</Property>
+              <Property>Date:</Property>
               <Value>{props.point.data.x}</Value>
             </PropertyContainer>
             <PropertyContainer>
-              <Property>Y-Value</Property>
+              <Property>Amount</Property>
               <Value>{props.point.data.y}</Value>
             </PropertyContainer>
             <PropertyContainer>
@@ -117,47 +102,47 @@ const ComparisonCard = props => {
           </Row>
           <Row value={value}>
             <PropertyContainer>
-              <Property>ID:</Property>
-              <Value>{props.point.id}</Value>
+              <Property>Borrower:</Property>
+              <Value>{props.point.serieId}</Value>
             </PropertyContainer>
             <PropertyContainer>
-              <Property>X-Value:</Property>
+              <Property>Date:</Property>
               <Value>{props.point.data.x}</Value>
             </PropertyContainer>
             <PropertyContainer>
-              <Property>Y-Value</Property>
-              <Value>{props.point.data.y}</Value>
+              <Property>Amount</Property>
+              <Value>{"$" + props.point.data.y}</Value>
             </PropertyContainer>
           </Row>
           <Row value={value}>
             <PropertyContainer>
-              <Property>X-Value:</Property>
-              <Value>{props.point.data.x}</Value>
+              <Property>{counter[0] ? counter[0] : null}</Property>
+              <Value>{values[0] ? values[0] : null}</Value>
             </PropertyContainer>
             <PropertyContainer>
-              <Property>X-Value:</Property>
-              <Value>{props.point.data.x}</Value>
+              <Property>{counter[1] ? counter[1] : null}</Property>
+              <Value>{values[1] ? values[1] : null}</Value>
             </PropertyContainer>
             <PropertyContainer>
-              <Property>Y-Value</Property>
-              <Value>{props.point.data.y}</Value>
+              <Property>{counter[2] ? counter[2] : null}</Property>
+              <Value>{values[2] ? values[2] : null}</Value>
             </PropertyContainer>
           </Row>
-          <Row value={value}>
-            <PropertyContainer>
-              <Property>Y-Value</Property>
-              <Value>{props.point.data.y}</Value>
-            </PropertyContainer>
-            <PropertyContainer>
+          {/* <Row value={value}>
+            <PropertyContainer style={{ width: "100%" }}>
+              <Property>Joint Lead Arrangers</Property> */}
+              {/* <Value>{data.joint_lead_arrangers.join(", ")}</Value> */}
+            {/* </PropertyContainer> */}
+            {/* <PropertyContainer>
               <Property>X-Value:</Property>
               <Value>{props.point.data.x}</Value>
             </PropertyContainer>
             <PropertyContainer>
               <Property>Y-Value</Property>
               <Value>{props.point.data.y}</Value>
-            </PropertyContainer>
-          </Row>
-          <Row value={value}>
+            </PropertyContainer> */}
+          {/* </Row> */}
+          {/* <Row value={value}>
             <PropertyContainer>
               <Property>Series</Property>
               <Value>{props.point.serieId}</Value>
@@ -170,11 +155,10 @@ const ComparisonCard = props => {
               <Property>Y-Value</Property>
               <Value>{props.point.data.y}</Value>
             </PropertyContainer>
-          </Row>
+          </Row> */}
         </StyledComparisonCard>
       )}
     </React.Fragment>
-    /* </StyledComparisonCard> */
   );
 };
 

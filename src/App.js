@@ -1,6 +1,8 @@
 import React, { useState, Suspense } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import axios from "axios";
 import { ResponsiveContext } from "./Context/ResponsiveContext";
+import file from "./Data/libor_original.xls";
 
 const AuthenticatedApp = React.lazy(() =>
   import("./AuthenticatedApp/AuthenticatedApp")
@@ -16,6 +18,13 @@ const StyledApp = styled.div`
   color: #353958;
   letter-spacing: 2px;
   font-size: 12.5px;
+  font-family: Helvetica;
+  ${props =>
+    props.value &&
+    css`
+      width: innerWidth;
+      height: innerHeight;
+    `}
 `;
 
 function App() {
@@ -24,6 +33,8 @@ function App() {
   let [innerHeight, setInnerHeight] = useState(window.innerHeight);
   let orientation = innerWidth > innerHeight ? "landscape" : "portrait";
   let contextValue = { innerWidth, innerHeight, orientation };
+  const [modelTrained, trainModel] = useState(false);
+  
 
   function onResize(e) {
     setInnerWidth(e.target.innerWidth);
@@ -32,9 +43,23 @@ function App() {
 
   window.addEventListener("resize", onResize);
 
+  // console.log(file);
+
+  // if (!modelTrained) {
+
+    // axios
+    //   .get("http://18.222.132.180:5000/")
+    //   .then(response => {
+    //     console.log(response);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+  // }
+
   return (
     <ResponsiveContext.Provider value={contextValue}>
-      <StyledApp>
+      <StyledApp value={contextValue}>
         <Suspense fallback={<div>"Loading..."</div>}>
           {isAuthenticated ? (
             <AuthenticatedApp isAuthenticated={isAuthenticated} />
